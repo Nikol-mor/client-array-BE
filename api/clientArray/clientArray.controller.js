@@ -1,5 +1,6 @@
 const clientArrayService = require('./clientArray.service');
 const logger = require('../../services/logger.service');
+const socket = require('../../services/socket.service');
 
 module.exports = {
   // getclientArrays,
@@ -14,6 +15,7 @@ async function addclientArray(req, res) {
   try {
     const clientArray = req.body;
     const addedclientArray = await clientArrayService.add(clientArray);
+    // socket.emit('addedArray', addedclientArray);
     res.send(addedclientArray);
   } catch (err) {
     logger.error('Failed to add clientArray', err);

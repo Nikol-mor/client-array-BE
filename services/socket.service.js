@@ -14,26 +14,8 @@ function connectSockets(http, session) {
     socket.on('disconnect', (socket) => {
       console.log('Someone disconnected');
     });
-    socket.on('clientArray id', (clientArrayId) => {
-      if (socket.clientArrayId === clientArrayId) return;
-      if (socket.clientArrayId) {
-        socket.leave(socket.clientArrayId);
-      }
-      socket.join(clientArrayId);
-      socket.clientArrayId = clientArrayId;
-      console.log('joined to', socket.clientArrayId);
-    });
-
-    socket.on('changeSongs', (songs) => {
-      socket.broadcast.emit('songsChanged', songs);
-    });
-
-    socket.on('addActivity', (activitylog) => {
-      socket.broadcast.emit('activityAdded', activitylog);
-    });
-
-    socket.on('addFollow', (userId) => {
-      socket.to(socket.id).emit('followYou', userId);
+    socket.on('arrayCreated', (addedclientArray) => {
+      socket.broadcast.emit('arrayCreated', addedclientArray);
     });
   });
 }
