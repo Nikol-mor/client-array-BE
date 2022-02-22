@@ -14,8 +14,9 @@ function connectSockets(http, session) {
     socket.on('disconnect', (socket) => {
       console.log('Someone disconnected');
     });
-    socket.on('arrayCreated', (addedclientArray) => {
-      socket.broadcast.emit('arrayCreated', addedclientArray);
+    socket.on('addedArray', (array) => {
+      socket.broadcast.emit('addedArray', array);
+      console.log(' BE other user added array');
     });
   });
 }
