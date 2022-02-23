@@ -1,19 +1,17 @@
-const logger = require('../services/logger.service')
-const asyncLocalStorage = require('../services/als.service')
+const asyncLocalStorage = require('../services/als.service');
 
 async function setupAsyncLocalStorage(req, res, next) {
-  const storage = {}
+  const storage = {};
   asyncLocalStorage.run(storage, () => {
     if (req.sessionID) {
-      const alsStore = asyncLocalStorage.getStore()
-      alsStore.sessionId = req.sessionID
+      const alsStore = asyncLocalStorage.getStore();
+      alsStore.sessionId = req.sessionID;
       if (req.session.user) {
-        alsStore.userId = req.session.user._id
+        alsStore.userId = req.session.user._id;
       }
     }
-    next()
-  })
+    next();
+  });
 }
 
-module.exports = setupAsyncLocalStorage
-
+module.exports = setupAsyncLocalStorage;
